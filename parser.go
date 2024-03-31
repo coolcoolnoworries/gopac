@@ -77,7 +77,7 @@ func (parser *Parser) ParseUrl(url string) error {
 		}
 	}
 
-        //prevent default UA from being sent
+        //prevent default UA from being sent (UA header is unnecessary and causes logging issues in some scenarios)
         client := &http.Client{}
         req, err := http.NewRequest("GET", url, nil)
 

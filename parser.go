@@ -77,7 +77,12 @@ func (parser *Parser) ParseUrl(url string) error {
 		}
 	}
 
-	response, err := http.Get(url)
+        //prevent default UA from being sent
+        client := &http.Client{}
+        req, err := http.NewRequest("GET", url, nil)
+
+        req.Header.Set("User-Agent", "")
+        response, err := client.Do(req)
 
 	if err != nil {
 		return err
